@@ -1,0 +1,38 @@
+[ec2-user@ip-172-31-27-210 ~]$ sudo su -
+[root@ip-172-31-27-210 ~]# yum update
+[root@ip-172-31-27-210 ~]# java
+-bash: java: command not found
+[root@ip-172-31-27-210 ~]# yum -y install java-1.8*
+[root@ip-172-31-27-210 ~]# find /usr/lib/jvm/java-1.8* | head -n 3
+/usr/lib/jvm/java-1.8.0
+/usr/lib/jvm/java-1.8.0-openjdk
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64
+[root@ip-172-31-27-210 ~]# vi .bash_profile
+
+[root@ip-172-31-27-210 ~]# echo $JAVA_HOME
+
+[root@ip-172-31-27-210 ~]# source ~/.bash_profile
+[root@ip-172-31-27-210 ~]# echo $JAVA_HOME
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64
+[root@ip-172-31-27-210 ~]# cat .bash_profile
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64
+
+PATH=$PATH:$HAVA_HOME:$HOME/bin
+
+export PATH
+[root@ip-172-31-27-210 ~]#
+[root@ip-172-31-27-210 ~]# yum -y install wget
+[root@ip-172-31-27-210 ~]# sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+[root@ip-172-31-27-210 ~]# sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+[root@ip-172-31-27-210 ~]# systemctl start jenkins
+[root@ip-172-31-27-210 ~]#
+[root@ip-172-31-27-210 ~]# systemctl enable jenkins
+[root@ip-172-31-27-210 ~]# chkconfig jenkins on

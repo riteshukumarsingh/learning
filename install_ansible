@@ -1,0 +1,39 @@
+yum -y update
+yum install wget
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -ivh epel-release-latest-7.noarch.rpm
+yum install ansible
+ansible --version
+useradd ansadmin (on both server)
+paswd ansadmin (on both server)
+vim /etc/ssh/sshd_config
+change the below configuration
+PasswordAuthentication yes
+#PermitEmptyPasswords no
+#PasswordAuthentication no
+
+ssh ansadmin@172.31.26.100 (run on master system)
+ansadmin@172.31.26.100's password: (run on master system)
+[ansadmin@ip-172-31-26-100 ~]$ ssh-keygen (run on master system)
+[ansadmin@ip-172-31-26-100 ~]$ ls -la
+total 12
+drwx------. 3 ansadmin ansadmin  74 Jan 15 21:03 .
+drwxr-xr-x. 5 root     root      53 Jan 15 20:38 ..
+-rw-r--r--. 1 ansadmin ansadmin  18 May 22  2018 .bash_logout
+-rw-r--r--. 1 ansadmin ansadmin 193 May 22  2018 .bash_profile
+-rw-r--r--. 1 ansadmin ansadmin 231 May 22  2018 .bashrc
+drwx------. 2 ansadmin ansadmin  38 Jan 15 21:03 .ssh
+[ansadmin@ip-172-31-26-100 ~]$ cd .ssh/
+[ansadmin@ip-172-31-26-100 .ssh]$ ll
+total 8
+-rw-------. 1 ansadmin ansadmin 1679 Jan 15 21:03 id_rsa
+-rw-r--r--. 1 ansadmin ansadmin  435 Jan 15 21:03 id_rsa.pub
+[ansadmin@ip-172-31-26-100 .ssh]$ ssh-copy-id 172.31.20.20 (run on master system)
+
+sudo vim /etc/ansible/hosts (on master system)
+
+ansible all -m copy -a "src=/home/ansadmin/hellow.html dest=/home/ansadmin"
+ansible all -m yum -a "name=httpd state=latest"
+ansible -s all -m service -a "name=httpd state=started"
+ansible -s all -m service -a "name=httpd state=stopped"
+ansible -s all -m service -a "name=httpd state=started"
