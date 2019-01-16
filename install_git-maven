@@ -1,0 +1,15 @@
+install git>
+sudo yum -y install git
+git init
+
+
+install maven>>>> https://www.javahelps.com/2017/10/install-apache-maven-on-linux.html
+
+wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
+tar -xvzf apache-maven-3.6.0-bin.tar.gz
+cat /etc/environment
+M2_HOME="/opt/apache-maven-3.6.0"
+update-alternatives --install "/usr/bin/mvn" "mvn" "/opt/apache-maven-3.6.0/bin/mvn" 0
+update-alternatives --set mvn /opt/apache-maven-3.6.0/bin/mvn
+wget https://raw.github.com/dimaj/maven-bash-completion/master/bash_completion.bash --output-document /etc/bash_completion.d/mvn
+mvn --version
